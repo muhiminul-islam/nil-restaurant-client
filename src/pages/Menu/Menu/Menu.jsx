@@ -22,18 +22,18 @@ const Menu = () => {
                 <title>Nil Restaurant | Menu</title>
             </Helmet>
             {/* main cover */}
-            <Cover img={menuImg} title="Our menu"></Cover>
+            <Cover img={menuImg} title="our menu"></Cover>
             <SectionTitle subHeading="Don't miss" heading="Today's offer"></SectionTitle>
             {/* offered menu items */}
             <MenuCategory items={offered}></MenuCategory>
             {/* dessert menu items */}
-            <MenuCategory items={dessert} coverImg={dessertImg} title="Desserts"></MenuCategory>
+            <MenuCategory items={dessert} coverImg={dessertImg} title="desserts"></MenuCategory>
             {/* pizza menu items */}
-            <MenuCategory items={pizza} coverImg={pizzaImg} title="Pizza"></MenuCategory>
+            <MenuCategory items={pizza} coverImg={pizzaImg} title="pizza"></MenuCategory>
             {/* salad menu items */}
-            <MenuCategory items={salad} coverImg={saladImg} title="Salads"></MenuCategory>
+            <MenuCategory items={salad} coverImg={saladImg} title="salads"></MenuCategory>
             {/* soup menu items */}
-            <MenuCategory items={soup} coverImg={soupImg} title="Soups"></MenuCategory>
+            <MenuCategory items={soup} coverImg={soupImg} title="soups"></MenuCategory>
 
         </div>
     );
