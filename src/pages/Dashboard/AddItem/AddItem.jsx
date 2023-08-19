@@ -1,11 +1,15 @@
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 const img_hosting_token = import.meta.env.VITE_Image_Upload_Token;
 
 const AddItem = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [axiosSecure] = useAxiosSecure();
+    const { register, handleSubmit, reset } = useForm();
     const image_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
     const onSubmit = data => {
 
@@ -23,12 +27,29 @@ const AddItem = () => {
                     const { name, price, category, recipe } = data;
                     const newItem = { name, price: parseFloat(price), category, recipe, image: imgURL }
                     console.log(newItem);
+                    axiosSecure.post('/menu', newItem)
+                        .then(data => {
+                            console.log('after posting new menu item', data.data);
+                            if (data.data.insertedId) {
+                                reset();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Item added sucsessfully',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        })
                 }
             })
 
     };
     return (
         <div className="w-full px-10">
+            <Helmet>
+                <title>Nil Restaurant | Add Item</title>
+            </Helmet>
             <SectionTitle subHeading="What's new?" heading="Add an item"></SectionTitle>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full ">
